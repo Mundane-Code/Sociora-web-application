@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="'Following - ' + ${user.username}">Following</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="profile-header">
+            <h1 th:text="'People ' + ${user.username} + ' follows'">Following</h1>
+            <a th:href="'/users/profile/' + ${user.username}" class="btn btn-secondary">Back to Profile</a>
+        </div>
+
+        <div class="following-list">
+            <div th:if="${#lists.isEmpty(following)}" class="no-following">
+                <p>Not following anyone yet.</p>
+            </div>
+            <div th:each="followed : ${following}" class="following-item">
+                <div class="following-info">
+                    <img th:src="${followed.profilePicture != null ? followed.profilePicture : '/images/default-profile.png'}"
+                         alt="Profile Picture" class="following-img">
+                    <div class="following-details">
+                        <h3><a th:href="'/users/profile/' + ${followed.username}" th:text="${followed.username}">Username</a></h3>
+                        <p th:text="${followed.fullName}" class="following-name">Full Name</p>
+                        <p th:text="${followed.bio}" class="following-bio">Bio</p>
+                    </div>
+                </div>
+                <!-- In a real app, you'd check if current user is following this person -->
+                <button class="btn btn-secondary unfollow-btn" onclick="alert('Unfollow functionality would be implemented here')">Unfollow</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+com\socials\sociora\entity\Community.class
+com\socials\sociora\entity\Follower.class
+com\socials\sociora\repository\FollowerRepository.class
+com\socials\sociora\repository\PostRepository.class
+com\socials\sociora\entity\Notification.class
+com\socials\sociora\entity\User.class
+com\socials\sociora\entity\Post.class

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="'Followers - ' + ${user.username}">Followers</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="profile-header">
+            <h1 th:text="'Followers of ' + ${user.username}">Followers</h1>
+            <a th:href="'/users/profile/' + ${user.username}" class="btn btn-secondary">Back to Profile</a>
+        </div>
+
+        <div class="followers-list">
+            <div th:if="${#lists.isEmpty(followers)}" class="no-followers">
+                <p>No followers yet.</p>
+            </div>
+            <div th:each="follower : ${followers}" class="follower-item">
+                <div class="follower-info">
+                    <img th:src="${follower.profilePicture != null ? follower.profilePicture : '/images/default-profile.png'}"
+                         alt="Profile Picture" class="follower-img">
+                    <div class="follower-details">
+                        <h3><a th:href="'/users/profile/' + ${follower.username}" th:text="${follower.username}">Username</a></h3>
+                        <p th:text="${follower.fullName}" class="follower-name">Full Name</p>
+                        <p th:text="${follower.bio}" class="follower-bio">Bio</p>
+                    </div>
+                </div>
+                <!-- In a real app, you'd check if current user is following this follower -->
+                <button class="btn btn-primary follow-btn" onclick="alert('Follow functionality would be implemented here')">Follow</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/script.js"></script>
+</body>
+</html>

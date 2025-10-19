@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="'Profile - ' + ${user.username}">Profile</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="profile-header">
+            <div class="profile-picture">
+                <img th:src="${user.profilePicture != null ? user.profilePicture : '/images/default-profile.png'}"
+                     alt="Profile Picture" class="profile-img">
+            </div>
+            <div class="profile-info">
+                <h1 th:text="${user.username}">Username</h1>
+                <p th:text="${user.fullName}" class="full-name">Full Name</p>
+                <p th:text="${user.bio}" class="bio">Bio</p>
+
+                <div class="profile-stats">
+                    <div class="stat">
+                        <span class="stat-number" th:text="${followerCount}">0</span>
+                        <span class="stat-label">Followers</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number" th:text="${followingCount}">0</span>
+                        <span class="stat-label">Following</span>
+                    </div>
+                </div>
+
+                <div class="profile-details">
+                    <p th:if="${user.location}"><strong>Location:</strong> <span th:text="${user.location}">Location</span></p>
+                    <p th:if="${user.website}"><strong>Website:</strong> <a th:href="${user.website}" th:text="${user.website}">Website</a></p>
+                    <p th:if="${user.interests}"><strong>Interests:</strong> <span th:text="${user.interests}">Interests</span></p>
+                    <p><strong>Member since:</strong> <span th:text="${#temporals.format(user.createdAt, 'MMM yyyy')}">Date</span></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="profile-actions">
+            <a th:href="'/followers/' + ${user.username} + '/followers'" class="btn btn-secondary">View Followers</a>
+            <a th:href="'/followers/' + ${user.username} + '/following'" class="btn btn-secondary">View Following</a>
+            <!-- In a real app, you'd check if current user can edit this profile -->
+            <a href="#" class="btn btn-primary" onclick="alert('Edit profile functionality would be implemented here')">Edit Profile</a>
+        </div>
+
+        <!-- Placeholder for posts/timeline -->
+        <div class="profile-content">
+            <h2>Recent Activity</h2>
+            <p>This is where the user's posts and activity would be displayed.</p>
+        </div>
+    </div>
+
+    <script src="/js/script.js"></script>
+</body>
+</html>
